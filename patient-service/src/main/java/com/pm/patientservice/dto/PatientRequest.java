@@ -1,5 +1,6 @@
 package com.pm.patientservice.dto;
 
+import com.pm.patientservice.dto.validators.CreatePatientValidationGroup;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -23,7 +24,7 @@ public class PatientRequest {
 
     @Setter
     @Getter
-    @NotBlank( message =
+    @NotBlank(groups = CreatePatientValidationGroup.class, message =
             "Registered date is required")
     private String registeredDate;
 
