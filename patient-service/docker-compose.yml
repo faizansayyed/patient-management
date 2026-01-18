@@ -1,0 +1,19 @@
+# Remove the 'version' line and fix depends_on
+services:
+  patient-service:
+    build: ..
+    container_name: patient-service
+    environment:
+      # Use host.docker.internal to connect to your existing PostgreSQL
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/db
+      SPRING_DATASOURCE_USERNAME: admin_user
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
+      SPRING_SQL_INIT_MODE: always
+    ports:
+      - "8080:8080"
+    # REMOVE depends_on since postgres is not in this compose file
+    # depends_on:   # <-- Remove this entire section
+    #   postgres:
+    #     condition: service_healthy
